@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Card channel animation</title>
+</head>
+<body>
+    <input type="text" placeholder="set you inc. name" name="Cname" id="setname"/>
+    <input id="clickrun" type="button" value="Click run"/>
+    <div class="content">
+        <div class="content-card">
+            <div id="acard" class="card">
+                <div id="arrowtop" class="click arrowTop"></div>
+                <div id="arrowdown" class="click arrowDown"></div>
+                <div id="arrowleft" class="click arrowLeft"></div>
+                <div id="a1" class="click a1"></div>
+                <div id="a2" class="click a2"></div>
+                <div id="a3" class="click a3"></div>
+                <div id="a4" class="click a4"></div>
+                <p id="cname" class="cardname"></p>
+            </div>
+        </div>
+    </div>
+    <script>
+        const Acard = document.getElementById('acard');
+        const Atop = document.getElementById('arrowtop');
+        const Adown = document.getElementById('arrowdown');
+        const Aleft = document.getElementById('arrowleft');
+        const Aa1 = document.getElementById('a1');
+        const Aa2 = document.getElementById('a2');
+        const Aa3 = document.getElementById('a3');
+        const Aa4 = document.getElementById('a4');
+        const Acname = document.getElementById('cname');
+        var evit = -1;
+        document.getElementById('clickrun').addEventListener('click',()=>{
+            const Agetname = document.getElementById('setname').value;
+            ++evit;
+            Acname.textContent = Agetname;
+            textVerify(Acname.textContent.length);
+            if(evit == 0){
+            evit=-1;
+            Acard.classList.toggle('acard');
+            document.getElementById('clickrun').disabled=true;
+            setTimeout(() => {
+                Acard.classList.toggle('acardA');
+
+            }, 1000);
+            setTimeout(() => {
+                document.getElementById('clickrun').disabled=false;
+                Acard.classList.toggle('acard');
+                Acard.classList.toggle('acardA');
+                go();
+            }, 1500);
+            if(Aa1.classList.contains('a1Active')){
+            Aa1.classList.toggle('a1Active');
+            Aa2.classList.toggle('a2Active');
+            Aa3.classList.toggle('a3Active');
+            Aa4.classList.toggle('a4Active');
+            Atop.classList.toggle('arrowtopActive');
+            Adown.classList.toggle('arrowdownActive');
+            Aleft.classList.toggle('arrowleftActive');
+            Acname.classList.toggle('cardnameActive');
+            }
+            }
+        });
+        var evitar =-1;
+        function go(){
+            ++evitar;
+            Aa1.classList.toggle('a1Active');
+            Aa2.classList.toggle('a2Active');
+            Aa3.classList.toggle('a3Active');
+            Aa4.classList.toggle('a4Active');
+            if(evitar == 0){
+                evitar=-1;
+            setTimeout(arrow,1000);
+            }
+        }
+
+        var evita = -1;
+        function arrow(){
+            ++evita;
+            Atop.classList.toggle('arrowtopActive');
+            Adown.classList.toggle('arrowdownActive');
+            Aleft.classList.toggle('arrowleftActive');
+            if(evita == 0){
+                evita=-1;
+            setTimeout(cname,700);
+            }
+        }
+        function cname(){
+            Acname.classList.toggle('cardnameActive');
+        }
+        function textVerify(countText){
+        if(countText >= 25 && countText <= 50){
+            Acname.style.fontSize=12+'px';
+        }else if(countText <= 16){
+            Acname.style.fontSize=18+'px';
+        }else if(countText >= 16 && countText <= 21){
+            Acname.style.fontSize=14+'px';
+        }else if(countText >= 52){
+            Acname.style.fontSize=10+'px';
+        }
+        }
+
+    </script>
+</body>
+</html>
